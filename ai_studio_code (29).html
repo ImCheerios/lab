@@ -1,142 +1,430 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortimer McClue - Detective Privado</title>
-    <style>
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #1a1a1a;
-            color: #cccccc;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #2b2b2b;
-            border-left: 5px solid #8b0000; /* Un toque de rojo oscuro */
-        }
-        h1 {
-            font-family: 'Courier New', monospace;
-            color: #ffffff;
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 0;
-            letter-spacing: 2px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #a0a0a0;
-            margin-top: 5px;
-            font-style: italic;
-        }
-        h2 {
-            color: #d4d4d4;
-            border-bottom: 1px solid #555555;
-            padding-bottom: 10px;
-            font-family: 'Courier New', monospace;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        ul li {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%238b0000" d="M21.432 9.754l-7.391-7.391c-1.02-1.02-2.678-1.02-3.698 0l-8.608 8.608c-1.02 1.02-1.02 2.678 0 3.698l7.391 7.391c1.02 1.02 2.678 1.02 3.698 0l8.608-8.608c1.02-1.02 1.02-2.678 0-3.698zm-1.414 2.284l-8.608 8.608c-.293.293-.768.293-1.061 0l-7.391-7.391c-.293-.293-.293-.768 0-1.061l8.608-8.608c.293-.293.768-.293 1.061 0l7.391 7.391c.293.293.293.768 0 1.061z"/></svg>') no-repeat left center;
-            padding-left: 25px;
-            margin-bottom: 10px;
-        }
-        .contact-info {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #111;
-            border-top: 2px solid #8b0000;
-        }
-        .contact-info p {
-            margin: 5px 0;
-            font-size: 1.1em;
-        }
-        blockquote {
-            font-style: italic;
-            border-left: 3px solid #777;
-            padding-left: 15px;
-            margin-left: 0;
-            color: #b0b0b0;
-        }
-        blockquote footer {
-            text-align: right;
-            font-style: normal;
-            font-weight: bold;
-            color: #ccc;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortimer McClue - Detective Privado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0f12;
+      --panel: rgba(255, 255, 255, 0.04);
+      --stroke: rgba(255, 255, 255, 0.08);
+      --accent: #d8323c;
+      --accent-2: #ff8c5f;
+      --text: #e7e7e7;
+      --muted: #98a0ad;
+      --glow: 0 10px 40px rgba(216, 50, 60, 0.35);
+      --radius: 18px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(216, 50, 60, 0.08), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(255, 140, 95, 0.08), transparent 25%),
+        linear-gradient(135deg, #0c0c0f 0%, #0b111c 100%);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 32px 18px 72px;
+      min-height: 100vh;
+    }
+
+    .frame {
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid var(--stroke);
+      background: linear-gradient(140deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
+      box-shadow:
+        var(--glow),
+        0 30px 120px rgba(0, 0, 0, 0.65);
+      padding: 38px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.06), transparent 35%);
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 0.04em;
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      color: #fff;
+    }
+
+    .title-block .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-style: italic;
+      font-size: 1.05rem;
+    }
+
+    .meta {
+      justify-self: end;
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.95rem;
+      display: grid;
+      gap: 8px;
+    }
+
+    .meta .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: var(--panel);
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .meta .badge span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 14px rgba(216, 50, 60, 0.9);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--stroke);
+      margin: 20px 0 32px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(216, 50, 60, 0.04), transparent);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    h2 {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+
+    h2::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(255, 140, 95, 0.6);
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--stroke);
+      padding: 14px 15px;
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.03), transparent 45%);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216, 50, 60, 0.7);
+      box-shadow: var(--glow);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--text);
+    }
+
+    ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(216, 50, 60, 0.55);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(216, 50, 60, 0.8), transparent);
+      opacity: 0.7;
+    }
+
+    .timeline-entry {
+      padding-left: 24px;
+    }
+
+    .timeline-entry strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    blockquote {
+      margin: 10px 0;
+      padding: 14px 16px;
+      border-left: 3px solid rgba(255, 140, 95, 0.4);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    blockquote footer {
+      text-align: right;
+      color: #fff;
+      font-weight: 600;
+      font-style: normal;
+      margin-top: 8px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0b0c11;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 35px rgba(216, 50, 60, 0.45);
+    }
+
+    .cta span {
+      font-size: 1.2rem;
+    }
+
+    .contact-info {
+      margin-top: 10px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(216, 50, 60, 0.12), rgba(255, 140, 95, 0.14));
+      border: 1px solid rgba(216, 50, 60, 0.35);
+      box-shadow: var(--glow);
+    }
+
+    .contact-info h2 {
+      margin-bottom: 6px;
+    }
+
+    .contact-info p {
+      margin: 4px 0;
+      color: #fff;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: left;
+      }
+
+      .meta {
+        justify-self: start;
+        text-align: left;
+      }
+
+      .frame {
+        padding: 26px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Mortimer McClue</h1>
-            <p class="subtitle">La verdad, por turbia que sea.</p>
-        </header>
+  <div class="frame">
+    <header>
+      <div class="title-block">
+        <h1>Mortimer McClue</h1>
+        <p class="subtitle">La verdad, por turbia que sea.</p>
+        <a class="cta" href="#contacto"><span>●</span>Agendar reunión discreta</a>
+      </div>
+      <div class="meta">
+        <div class="badge"><span></span>19 años en las sombras</div>
+        <div>Ciudad Umbría · Casos resueltos: 300+</div>
+      </div>
+    </header>
 
-        <hr>
+    <hr>
 
-        <section id="filosofia">
-            <h2>Mi Filosofía</h2>
-            <p>
-                En una ciudad construida sobre secretos, la verdad es el bien más escaso. Mi trabajo no es juzgar, es encontrar. Navego por los claroscuros de la naturaleza humana para traer a la luz lo que se ha perdido, lo que se ha ocultado o lo que, desesperadamente, alguien intenta olvidar. Discreción, tenacidad y una taza de café solo y amargo. Es todo lo que necesito.
-            </p>
-        </section>
+    <section id="filosofia">
+      <h2>Mi Filosofía</h2>
+      <p>
+        En una ciudad construida sobre secretos, la verdad es el bien más escaso. Mi trabajo no es juzgar, es encontrar.
+        Navego por los claroscuros de la naturaleza humana para traer a la luz lo que se ha perdido o lo que alguien intenta olvidar.
+        Discreción, tenacidad y un café solo y amargo. Es todo lo que necesito.
+      </p>
+    </section>
 
-        <section id="servicios">
-            <h2>Servicios</h2>
-            <ul>
-                <li>Personas Desaparecidas y Localizaciones</li>
-                <li>Investigación de Infidelidades</li>
-                <li>Fraude Corporativo y Verificación de Socios</li>
-                <li>Verificación de Antecedentes (Due Diligence)</li>
-                <li>Vigilancia y Seguimiento Discreto</li>
-                <li>Recuperación de Información Sensible</li>
-            </ul>
-        </section>
-
-        <section id="experiencia">
-            <h2>Experiencia Profesional (CV)</h2>
-            <p><strong>Detective Privado, Investigaciones McClue (2005 - Presente)</strong><br>
-            Director y único investigador. He resuelto más de 300 casos, desde asuntos domésticos con finales agridulces hasta complejas tramas de espionaje industrial. Mi reputación se basa en resultados, no en promesas.</p>
-
-            <p><strong>Detective, Departamento de Policía de Ciudad Umbría (1995 - 2005)</strong><br>
-            Unidad de Homicidios y Crímenes Mayores. Aprendí a leer las calles, a interpretar silencios y a entender que cada mentira deja un rastro. Honores por la resolución del "Caso del Orfebre Ciego". Abandoné el cuerpo para operar con mis propias reglas.</p>
-
-            <p><strong>Investigador, Inteligencia Militar (1990 - 1994)</strong><br>
-            Forjado en la disciplina y el análisis de contrainteligencia. Aquí aprendí que la información es poder y que la paciencia es el arma más afilada.</p>
-        </section>
-
-        <section id="testimonios">
-            <h2>Lo que dicen... (Nombres omitidos por confidencialidad)</h2>
-            <blockquote>
-                "Pensé que mi socio era de fiar. McClue me demostró, con pruebas irrefutables, que mi confianza estaba depositada en una serpiente. Me salvó de la ruina."
-                <footer>- Un Ejecutivo Anónimo</footer>
-            </blockquote>
-            <blockquote>
-                "No dormía pensando dónde podría estar mi hermana. La policía había cerrado el caso. Mortimer la encontró en dos semanas. No hay dinero que pague esa tranquilidad."
-                <footer>- L.R.</footer>
-            </blockquote>
-        </section>
-
-        <div class="contact-info">
-            <h2>Contacto</h2>
-            <p>Las sombras tienen oídos. Sea breve.</p>
-            <p><strong>Teléfono:</strong> 555-CLUE-007</p>
-            <p><strong>Email:</strong> mortimer@mcclue-investigations.noir</p>
-            <p><em>La primera consulta no deja rastro.</em></p>
+    <section id="servicios">
+      <h2>Servicios</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Personas desaparecidas</strong>
+          Localización precisa, coordinación con fuerzas de seguridad y protocolos de contacto seguro.
         </div>
+        <div class="card">
+          <strong>Infidelidades con evidencia</strong>
+          Seguimiento discreto, informes fotográficos y cronologías verificables.
+        </div>
+        <div class="card">
+          <strong>Fraude corporativo</strong>
+          Verificación de socios, análisis de movimientos financieros y evaluación de riesgos reputacionales.
+        </div>
+        <div class="card">
+          <strong>Due diligence</strong>
+          Antecedentes de ejecutivos, relaciones ocultas y consistencia de identidades.
+        </div>
+        <div class="card">
+          <strong>Vigilancia</strong>
+          Operativos encubiertos, rutas seguras y reportes en tiempo real.
+        </div>
+        <div class="card">
+          <strong>Recuperación de información</strong>
+          Identificación de fugas, rastreo digital y aislamiento de activos críticos.
+        </div>
+      </div>
+    </section>
 
+    <section id="experiencia">
+      <h2>Experiencia Profesional</h2>
+      <div class="timeline">
+        <div class="timeline-entry">
+          <strong>Detective Privado · Investigaciones McClue (2005 - Presente)</strong>
+          Director y único investigador. Más de 300 casos resueltos, de lo doméstico al espionaje industrial. La reputación se gana con evidencias, no con promesas.
+        </div>
+        <div class="timeline-entry">
+          <strong>Detective · Departamento de Policía de Ciudad Umbría (1995 - 2005)</strong>
+          Unidad de Homicidios y Crímenes Mayores. Honores por el "Caso del Orfebre Ciego". Aprendí a leer silencios y rastros invisibles.
+        </div>
+        <div class="timeline-entry">
+          <strong>Investigador · Inteligencia Militar (1990 - 1994)</strong>
+          Forjado en contrainteligencia. La información es poder y la paciencia, el arma más afilada.
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios">
+      <h2>Testimonios reservados</h2>
+      <blockquote>
+        "Pensé que mi socio era de fiar. McClue me demostró, con pruebas irrefutables, que mi confianza estaba depositada en una serpiente. Me salvó de la ruina."
+        <footer>- Ejecutivo anónimo</footer>
+      </blockquote>
+      <blockquote>
+        "No dormía pensando dónde podría estar mi hermana. La policía había cerrado el caso. Mortimer la encontró en dos semanas. No hay dinero que pague esa tranquilidad."
+        <footer>- L.R.</footer>
+      </blockquote>
+    </section>
+
+    <div class="contact-info" id="contacto">
+      <h2>Contacto</h2>
+      <p>Las sombras tienen oídos. Sea breve.</p>
+      <p><strong>Teléfono:</strong> 555-CLUE-007</p>
+      <p><strong>Email:</strong> mortimer@mcclue-investigations.noir</p>
+      <p><em>La primera consulta no deja rastro.</em></p>
     </div>
+  </div>
 
 </body>
 </html>
